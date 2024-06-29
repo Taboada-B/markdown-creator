@@ -1,8 +1,8 @@
 // TODO: Include packages needed for this application
 const inquirer = require("inquirer");
 // const colors = require("colors");
-// const fs = require('fs');
-// const fileName = 'README.md'
+const fs = require('fs');
+
 
 
 // TODO: Create an array of questions for user input
@@ -24,11 +24,11 @@ const questions = [
     },
 
 
-    // {
-    //     type: 'input',
-    //     name: '',
-    //     message: '',
-    // }, 
+    {
+        type: 'input',
+        name: 'url',
+        message: 'What is the deployed url?',
+    }, 
     // {
     //     type: 'input',
     //     name: '',
@@ -61,7 +61,8 @@ function init() {
             console.log(answers)
             if(answers.createReadme){
                 const fileName = 'README.md';
-                writeToFile(fileName, answers)
+    
+                writeToFile(fileName, answers);
             }
             else{
                 
@@ -83,18 +84,20 @@ function init() {
 function writeToFile(fileName, data) {
     console.log(fileName, data)
     console.log('did I make it here?')
+    const readme = 
+    `# ${data.title}
+    ## Description
+     ${data.description}
+    ## URL
+    ${data.url}
+    
+    `
 
+    fs.writeFile(fileName, readme, (err) => {
+        if (err) throw err;
+        console.log(`Successfully written to ${fileName}`);
+      });
 }
-
-
-
-
-
-
-
-
-
-
 
 
 
