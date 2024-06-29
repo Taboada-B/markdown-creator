@@ -1,1 +1,6 @@
-node_modules
+node_modules/
+.DS_Store
+
+
+# Create a .gitignore file and include node_modules/ and .DS_Store/ so that your node_modules directory isn't tracked or uploaded to GitHub.
+#  Be sure to create your .gitignore file before installing any npm dependencies.
