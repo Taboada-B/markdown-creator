@@ -1,12 +1,11 @@
 // TODO: Include packages needed for this application
 const inquirer = require("inquirer");
-const fs = require('fs');
-
-
-
+const generateMarkdown = require("./utils/generateMarkdown");
+// const fs = require('fs');
 
 // TODO: Create an array of questions for user input
 const questions = [
+
     {
         type: 'confirm',
         name: 'createReadme',
@@ -25,13 +24,18 @@ const questions = [
 
     {
         type: 'input',
-        name: 'installation',
+        name: 'install',
         message: 'What steps are required to install your project?',
+    },
+    {
+        type: 'input', 
+        name: 'usage',
+        message: 'Provide instructions for use'
     },
 
     {
         type: 'input',
-        name: 'usage',
+        name: 'screenshot',
         message: 'add path to screenshot. ex: ./assets/images/screenshot.png',
     },
 
@@ -45,12 +49,12 @@ const questions = [
         type: 'input',
         name: 'credit',
         message: 'List collaborators with links to their github profiles',
-    }, 
+    },
 
     {
         type: 'list',
         name: 'license',
-        message:'What license are you using, or none?',
+        message: 'What license are you using, or none?',
         choices: ['MIT', 'Apache', 'GPL', 'None'],
     },
 
@@ -58,11 +62,11 @@ const questions = [
         type: 'input',
         name: 'contribute',
         message: 'How can other developers contribute? ',
-    }, 
+    },
 
 ];
 
-// TODO: Create a function to initialize app
+// creates the prompts to the user. 
 function init() {
     inquirer
         .prompt(questions)
@@ -71,45 +75,38 @@ function init() {
             console.log(answers)
             if (answers.createReadme) {
                 const fileName = 'README.md';
-
                 writeToFile(fileName, answers);
             }
             else {
-
                 return console.log('This application is to create a readme.');
             }
-
-            // writeToFile(fileName, answers);
         })
         .catch((error) => {
             console.error('There was an error', error);
-
         });
-
 }
 
 
-// TODO: Create a function to write README file
+// Formats user input into a markdown text.
+// Calls generateMarkdown to create the file
 
-function writeToFile(fileName, data) {
-    console.log(fileName, data)
-    console.log('did I make it here?')
+function writeToFile(fileName, answers) {
     const readme =
-        `# ${data.title}
-  ## Description
-   ${data.description}
-  ## URL
-  ${data.url}
-  
-  `
-
-    fs.writeFile(fileName, readme, (err) => {
-        if (err) throw err;
-        console.log(`Successfully written to ${fileName}`);
-    });
+    `# ${answers.title}
+    ## Description 
+    ${answers.description}
+    ## Installation
+    ${answers.install}
+    ## Usage
+    ${answers.usage}
+    ![screenshot](${answers.screenshot})
+    ## URL
+    ${answers.url}
+    ## Credits
+    ${answers.credit}
+    `
+    generateMarkdown(fileName, readme)
 }
-
-
 
 // Function call to initialize app
 init();
