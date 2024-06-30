@@ -4,13 +4,15 @@ const generateMarkdown = require("./utils/generateMarkdown");
 // const fs = require('fs');
 
 // TODO: Create an array of questions for user input
-const questions = [
-
+const thequestion = [
     {
-        type: 'confirm',
+        type:'confirm',
         name: 'createReadme',
         message: 'Are you creating a README.md?'
-    },
+    }
+]
+const questions = [
+
     {
         type: 'input',
         name: 'title',
@@ -67,7 +69,30 @@ const questions = [
 ];
 
 // creates the prompts to the user. 
+function readme(){
+    console.log('am I here?')
+    inquirer
+    .prompt(thequestion)
+
+    .then((answer) => {
+        if (answer.createReadme === true){
+            console.log('here 1')
+            return init()
+        }
+        else{
+            console.log('here 2')
+            return console.log('This is to create a readme.md');
+        }
+    })
+
+    .catch((error) =>{
+        return console.error('There was an error', error)
+    })
+}
+
+
 function init() {
+    console.log('here 3')
     inquirer
         .prompt(questions)
 
@@ -118,5 +143,4 @@ ${answers.contribute}
 }
 
 // Function call to initialize app
-init();
-
+readme();
