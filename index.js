@@ -28,7 +28,7 @@ const questions = [
         message: 'What steps are required to install your project?',
     },
     {
-        type: 'input', 
+        type: 'input',
         name: 'usage',
         message: 'Provide instructions for use'
     },
@@ -86,26 +86,35 @@ function init() {
         });
 }
 
-
 // Formats user input into a markdown text.
 // Calls generateMarkdown to create the file
-
 function writeToFile(fileName, answers) {
     const readme =
-    `# ${answers.title}
-    ## Description 
-    ${answers.description}
-    ## Installation
-    ${answers.install}
-    ## Usage
-    ${answers.usage}
-    ![screenshot](${answers.screenshot})
-    ## URL
-    ${answers.url}
-    ## Credits
-    ${answers.credit}
-    `
-    generateMarkdown(fileName, readme)
+        `# ${answers.title}
+## Description 
+${answers.description}
+ ## Table of Contents
+ - [Installation](#Installation)
+ - [Usage](#Usage)
+ - [URL](#URL)
+ - [Credits](#Credits)
+ - [License](#License)
+ - [How to Contribute](#HowtoContribute)
+## Installation
+${answers.install}
+## Usage
+${answers.usage}
+![screenshot](${answers.screenshot})
+## URL
+${answers.url}
+## Credits
+${answers.credit}
+## License
+${answers.license}
+## How to Contribute
+${answers.contribute}
+`
+ return generateMarkdown(fileName, readme)
 }
 
 // Function call to initialize app

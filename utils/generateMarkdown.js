@@ -18,7 +18,7 @@ function generateMarkdown(fileName, readme) {
   fs.writeFile(fileName, readme, (err) => {
     if (err) throw err;
     console.log(`Successfully written to ${fileName}`);
-});
+});  
 }
 
 module.exports = generateMarkdown;
