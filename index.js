@@ -1,12 +1,12 @@
 // Packages needed for this application
 const inquirer = require("inquirer");
-const generateMarkdown = require("./utils/generateMarkdown");
+const { generateMarkdown, renderLicenseSection } = require("./utils/generateMarkdown");
 
 
 // The first question to make sure the user wants to make a readme.md
 const thequestion = [
     {
-        type:'confirm',
+        type: 'confirm',
         name: 'createReadme',
         message: 'Are you creating a README.md?'
     }
@@ -70,22 +70,22 @@ const questions = [
 ];
 
 // Asks user if they want to make a readme.md
-function readme(){
+function readme() {
     inquirer
-    .prompt(thequestion)
-    // if the answer is yes, will continue with more questions
-    .then((answer) => {
-        if (answer.createReadme === true){
-            return init()
-        }
-        // no answer stops the program
-        else{
-            return console.log('This is to create a readme.md');
-        }
-    })
-    .catch((error) =>{
-        return console.error('There was an error', error)
-    })
+        .prompt(thequestion)
+        // if the answer is yes, will continue with more questions
+        .then((answer) => {
+            if (answer.createReadme === true) {
+                return init()
+            }
+            // no answer stops the program
+            else {
+                return console.log('This is to create a readme.md');
+            }
+        })
+        .catch((error) => {
+            return console.error('There was an error', error)
+        })
 }
 
 function init() {
@@ -93,9 +93,8 @@ function init() {
         .prompt(questions)
 
         .then((answers) => {
-            console.log(answers)
-                const fileName = 'README.md';
-                writeToFile(fileName, answers);
+            const fileName = 'README.md';
+            writeToFile(fileName, answers);
         })
         .catch((error) => {
             console.error('There was an error', error);
@@ -105,37 +104,43 @@ function init() {
 // Formats user input into a markdown text.
 // Calls generateMarkdown to create the file
 function writeToFile(fileName, answers) {
-    if (answers.license !== 'None'){
-        renderLicenseBadge(answers.license)
-    }
-    
+
+const licenseSection = renderLicenseSection(answers.license);
+
     const readme =
         `# ${answers.title}
+
 ## Description 
 ${answers.description}
- ## Table of Contents
- - [Installation](#Installation)
- - [Usage](#Usage)
- - [URL](#URL)
- - [Credits](#Credits)
- - [License](#License)
- - [How to Contribute](#HowtoContribute)
+
+## Table of Contents
+- [Installation](#installation)
+- [Usage](#usage)
+- [URL](#url)
+- [Credits](#credits)
+- [License](#license)
+- [How to Contribute](#how-to-contribute)
+
 ## Installation
 ${answers.install}
+
 ## Usage
 ${answers.usage}
 ![screenshot](${answers.screenshot})
+
 ## URL
 ${answers.url}
+
 ## Credits
 ${answers.credit}
-## License
-${answers.license} ${logo}
+
+${licenseSection}
+
 ## How to Contribute
 ${answers.contribute}
 `
- return generateMarkdown(fileName, readme)
+    return generateMarkdown(fileName, readme)
 }
 
-// Function call to initialize app
+// Initilize first function
 readme();

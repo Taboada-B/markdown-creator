@@ -13,24 +13,49 @@ function renderLicenseBadge(license) {
       break;
     default: logo = '';
   }
-  if (logo !== ''){
-  renderLicenseLink(license)
-  }
-  
+ 
   return logo
 }
 
 // TODO: Create a function that returns the license link
 // If there is no license, return an empty string
-function renderLicenseLink(license) { }
+function renderLicenseLink(license) { 
+  let link;
+  switch (license) {
+    case 'MIT':
+      link = '[MIT License](https://opensource.org/licenses/MIT)';
+      break;
+    case 'Apache':
+      link = '[Apache License](https://opensource.org/licenses/Apache-2.0)';
+      break;
+    case 'GPL':
+      link = '[GPL License](https://www.gnu.org/licenses/gpl-3.0.en.html)';
+      break;
+    default:
+      link = '';
+  }
+  return link;
+}
 
 // TODO: Create a function that returns the license section of README
 // If there is no license, return an empty string
 function renderLicenseSection(license) {
+  if (license === 'None') return '';
+  
+  const badge = renderLicenseBadge(license);
+  const link = renderLicenseLink(license);
 
+  // Example of constructing the license section
+  return `
+## License
+
+${badge}
+
+This project is licensed under the ${license} 
+- see the following link for details: ${link}`;
 }
 
-// TODO: Create a function to generate markdown for README
+// function generates markdown for README
 function generateMarkdown(fileName, readme) {
   fs.writeFile(fileName, readme, (err) => {
     if (err) throw err;
@@ -38,4 +63,11 @@ function generateMarkdown(fileName, readme) {
   });
 }
 
-module.exports = generateMarkdown;
+
+module.exports = { 
+  generateMarkdown, 
+  renderLicenseBadge,
+  renderLicenseLink,
+  renderLicenseSection 
+};
+
