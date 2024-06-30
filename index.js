@@ -1,9 +1,9 @@
-// TODO: Include packages needed for this application
+// Packages needed for this application
 const inquirer = require("inquirer");
 const generateMarkdown = require("./utils/generateMarkdown");
-// const fs = require('fs');
 
-// TODO: Create an array of questions for user input
+
+// The first question to make sure the user wants to make a readme.md
 const thequestion = [
     {
         type:'confirm',
@@ -11,6 +11,7 @@ const thequestion = [
         message: 'Are you creating a README.md?'
     }
 ]
+// the questions that must be answered to create a readme.md
 const questions = [
 
     {
@@ -68,43 +69,33 @@ const questions = [
 
 ];
 
-// creates the prompts to the user. 
+// Asks user if they want to make a readme.md
 function readme(){
-    console.log('am I here?')
     inquirer
     .prompt(thequestion)
-
+    // if the answer is yes, will continue with more questions
     .then((answer) => {
         if (answer.createReadme === true){
-            console.log('here 1')
             return init()
         }
+        // no answer stops the program
         else{
-            console.log('here 2')
             return console.log('This is to create a readme.md');
         }
     })
-
     .catch((error) =>{
         return console.error('There was an error', error)
     })
 }
 
-
 function init() {
-    console.log('here 3')
     inquirer
         .prompt(questions)
 
         .then((answers) => {
             console.log(answers)
-            if (answers.createReadme) {
                 const fileName = 'README.md';
                 writeToFile(fileName, answers);
-            }
-            else {
-                return console.log('This application is to create a readme.');
-            }
         })
         .catch((error) => {
             console.error('There was an error', error);
@@ -114,6 +105,10 @@ function init() {
 // Formats user input into a markdown text.
 // Calls generateMarkdown to create the file
 function writeToFile(fileName, answers) {
+    if (answers.license !== 'None'){
+        renderLicenseBadge(answers.license)
+    }
+    
     const readme =
         `# ${answers.title}
 ## Description 
@@ -135,7 +130,7 @@ ${answers.url}
 ## Credits
 ${answers.credit}
 ## License
-${answers.license}
+${answers.license} ${logo}
 ## How to Contribute
 ${answers.contribute}
 `
