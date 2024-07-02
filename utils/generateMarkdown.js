@@ -1,6 +1,25 @@
 const fs = require('fs');
 
-// TODO: Create a function that returns a license badge based on which license is passed in
+// TODO: Create a function that returns the license section of README
+// If there is no license, return an empty string
+function renderLicenseSection(license) {
+  if (license === 'None'){
+     return ''};
+  
+  const badge = renderLicenseBadge(license);
+  const link = renderLicenseLink(license);
+
+  // constructing the license section
+  return `
+## License
+
+${badge}
+
+This project is licensed under the ${license} 
+- see the following link for details: ${link}`;
+}
+
+// returns a license badge based on which license is passed in
 // If there is no license, return an empty string
 function renderLicenseBadge(license) {
   let logo; 
@@ -13,11 +32,10 @@ function renderLicenseBadge(license) {
       break;
     default: logo = '';
   }
- 
   return logo
 }
 
-// TODO: Create a function that returns the license link
+// A function that returns the license link
 // If there is no license, return an empty string
 function renderLicenseLink(license) { 
   let link;
@@ -37,25 +55,7 @@ function renderLicenseLink(license) {
   return link;
 }
 
-// TODO: Create a function that returns the license section of README
-// If there is no license, return an empty string
-function renderLicenseSection(license) {
-  if (license === 'None') return '';
-  
-  const badge = renderLicenseBadge(license);
-  const link = renderLicenseLink(license);
-
-  // Example of constructing the license section
-  return `
-## License
-
-${badge}
-
-This project is licensed under the ${license} 
-- see the following link for details: ${link}`;
-}
-
-// function generates markdown for README
+// function generates markdown file for README
 function generateMarkdown(fileName, readme) {
   fs.writeFile(fileName, readme, (err) => {
     if (err) throw err;

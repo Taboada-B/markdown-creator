@@ -11,6 +11,26 @@ const thequestion = [
         message: 'Are you creating a README.md?'
     }
 ]
+
+// Asks user if they want to make a readme.md
+function readme() {
+    inquirer
+        .prompt(thequestion)
+        // if the answer is yes, will continue with more questions
+        .then((answer) => {
+            if (answer.createReadme === true) {
+                return init()
+            }
+            // no answer stops the program
+            else {
+                return console.log('This is to create a readme.md');
+            }
+        })
+        .catch((error) => {
+            return console.error('There was an error', error)
+        })
+}
+
 // the questions that must be answered to create a readme.md
 const questions = [
 
@@ -53,7 +73,7 @@ const questions = [
         name: 'credit',
         message: 'List collaborators with links to their github profiles',
     },
-
+  
     {
         type: 'list',
         name: 'license',
@@ -68,26 +88,7 @@ const questions = [
     },
 
 ];
-
-// Asks user if they want to make a readme.md
-function readme() {
-    inquirer
-        .prompt(thequestion)
-        // if the answer is yes, will continue with more questions
-        .then((answer) => {
-            if (answer.createReadme === true) {
-                return init()
-            }
-            // no answer stops the program
-            else {
-                return console.log('This is to create a readme.md');
-            }
-        })
-        .catch((error) => {
-            return console.error('There was an error', error)
-        })
-}
-
+// asking followup questions, then calling writeToFile with answers. 
 function init() {
     inquirer
         .prompt(questions)
@@ -102,6 +103,7 @@ function init() {
 }
 
 // Formats user input into a markdown text.
+// calls renderLicenseSection to render license information
 // Calls generateMarkdown to create the file
 function writeToFile(fileName, answers) {
 
@@ -139,8 +141,9 @@ ${licenseSection}
 ## How to Contribute
 ${answers.contribute}
 `
+    //function creates file with readme info
     return generateMarkdown(fileName, readme)
 }
 
-// Initilize first function
+// Initilize first question function
 readme();
