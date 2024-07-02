@@ -24,11 +24,11 @@ This project is licensed under the ${license}
 function renderLicenseBadge(license) {
   let logo; 
   switch (license) {
-    case 'MIT':  logo = '![mit logo](./img/MIT-logo.jpg)';
+    case 'MIT':  logo = '<img src="./img/MIT-logo.jpg" alt="logo" width="50"/>';
       break;
-    case 'Apache':  logo = '![Apache logo](./img/apache-logo.jpg)';
+    case 'Apache':  logo = '<img src="./img/apache-logo.jpg" alt="logo" width="50"/>';
       break;
-    case 'GPL':  logo = '![GPL logo](./img/gpl-logo.png)';
+    case 'GPL':  logo = '<img src="./img/gpl-logo.png" alt="logo" width="50"/>';
       break;
     default: logo = '';
   }
