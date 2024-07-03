@@ -128,7 +128,8 @@ ${answers.install}
 
 ## Usage
 ${answers.usage}
-![screenshot](${answers.screenshot})
+
+<img src="${answers.screenshot}" alt="screenshot" width="400"/>
 
 ## URL
 ${answers.url}
