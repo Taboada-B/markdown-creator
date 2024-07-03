@@ -155,6 +155,7 @@ ${answers.contribute}
 
 ## Questions
 My github profile is: ${answers.username}
+
 My email is: ${answers.email}
 `
     //function creates file with readme info
