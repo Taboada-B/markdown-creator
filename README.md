@@ -21,7 +21,7 @@ Navigate to the root of the project folder in the command line, and run “node 
 <img src="./img/Screenshot.jpg" alt="screenshot" width="400"/>
 
 ## URL
-n/a
+N/A
 
 ## Credits
 Sergio was able to help contribute to creating this program.  His github url is https://github.com/Sergio-m .  
