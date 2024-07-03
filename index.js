@@ -86,6 +86,16 @@ const questions = [
         name: 'contribute',
         message: 'How can other developers contribute? ',
     },
+    {
+        type: 'input',
+        name: 'username',
+        message: 'What is your github url link? ',
+    },
+    {
+        type: 'input',
+        name: 'email',
+        message: 'What is your email address? ',
+    },
 
 ];
 // asking followup questions, then calling writeToFile with answers. 
@@ -122,6 +132,7 @@ ${answers.description}
 - [Credits](#credits)
 - [License](#license)
 - [How to Contribute](#how-to-contribute)
+- [Questions](#questions)
 
 ## Installation
 ${answers.install}
@@ -141,6 +152,10 @@ ${licenseSection}
 
 ## How to Contribute
 ${answers.contribute}
+
+## Questions
+My github profile is: ${answers.username}
+My email is: ${answers.email}
 `
     //function creates file with readme info
     return generateMarkdown(fileName, readme)
