@@ -83,11 +83,6 @@ const questions = [
 
     {
         type: 'input',
-        name: 'contribute',
-        message: 'How can other developers contribute? ',
-    },
-    {
-        type: 'input',
         name: 'username',
         message: 'What is your github url link? ',
     },
@@ -151,7 +146,12 @@ ${answers.credit}
 ${licenseSection}
 
 ## How to Contribute
-${answers.contribute}
+- Fork the repository to your own GitHub account.
+- Clone the repository to your local machine.
+- Create a new branch for your feature or bug fix.
+- Commit your changes and ensure that the commit message is clear and descriptive:
+- Push to your branch.
+- Create a Pull Request from your branch into the main repository's main branch. Make sure to provide a detailed explanation of the changes you've made.
 
 ## Questions
 My github profile is: ${answers.username}
